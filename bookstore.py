@@ -7,6 +7,19 @@ cursor = db.cursor()
 
 # Function to enter a new book into ebookstore database.
 def add_book():
+    '''
+    Add a new book to the ebookstore database.
+
+    This function prompts the user to enter information for a new book,
+    checks if the book already exists in the database and inserts the new
+    new book if it does not exist.
+    
+    Parameters:
+    None
+    
+    Returns:
+    None
+    '''
     id = int(input('Enter the book id here: '))
 
     # Check if the book exists
@@ -29,6 +42,19 @@ def add_book():
 
 # Function to update a book within the table.
 def update_book():
+    '''
+    Updates an existing book in the ebook database.
+
+    This function prompts the user to enter the book ID and the new quantity
+    of books. It then updates the quantity for the specified book in the
+    database.
+    
+    Parameters:
+    None
+    
+    Returns:
+    None
+    '''
     id = int(input('Enter the book id here: '))
     new_qty = int(input('Enter the new quantity of books here: '))
     cursor.execute('''UPDATE book SET qty = ? WHERE id = ?''',
@@ -39,6 +65,18 @@ def update_book():
 
 # Function to delete a specific book from the table
 def delete_book():
+    '''
+    Deletes a specifc book from the database.
+    
+    This function prompts the user for the book ID. It then deletes the 
+    book from the database.
+    
+    Parameters:
+    None
+    
+    Returns:
+    None
+    '''
     id = int(input('Enter book ID: '))
     cursor.execute('''DELETE FROM book WHERE id = ?''', (id,))
     db.commit()
@@ -47,6 +85,19 @@ def delete_book():
 
 # Function to enable the user to search for a book in the database.
 def search_book():
+    '''
+    Searchs for a book within the database and returns the selected books.
+    
+    This function prompts the user for the title that has to be searched for
+    (search_title). It then searches for the specific title in the database
+    and then displays the book with its information.
+    
+    Parameters:
+    None
+    
+    Returns:
+    None
+    '''
     search_title = input('Enter the title of the book here: ')
     cursor.execute('''SELECT * FROM book WHERE title = ?''', (search_title,))
     books = cursor.fetchall()
